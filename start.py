@@ -8,7 +8,7 @@ from multiprocessing import cpu_count
 
 app = Flask(__name__)
 
-@app.route('/', methods=['GET'])
+@app.route('/loadtester/load', methods=['GET'])
 def main():
     processes = cpu_count()
     pool = ThreadPool(processes)
@@ -21,11 +21,15 @@ def f(x):
     start_time = datetime.datetime.now()
     elapsed_time = datetime.datetime.now() - start_time
     x = 213123
-    while elapsed_time.microseconds < 1000000:
+    while elapsed_time.microseconds < 500000:
         elapsed_time = datetime.datetime.now() - start_time
         x = x*x
         x = x + 1
     return 'Done!'
+
+@app.route('/loadtester/health', methods=['GET'])
+def healthcheck():
+    return json.dumps('OK!')
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', debug=True)
