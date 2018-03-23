@@ -21,7 +21,7 @@ def f(x):
     start_time = datetime.datetime.now()
     elapsed_time = datetime.datetime.now() - start_time
     x = 213123
-    while elapsed_time.microseconds < 500000:
+    while elapsed_time.microseconds < 10000:
         elapsed_time = datetime.datetime.now() - start_time
         x = x*x
         x = x + 1
